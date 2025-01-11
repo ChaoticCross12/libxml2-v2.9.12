@@ -1,0 +1,7 @@
+conftest.c:98:6: warning: conflicting types for built-in function 'sprintf'; expected 'int(char *, const char *, ...)' [-Wbuiltin-declaration-mismatch]
+   98 | char sprintf ();
+      |      ^~~~~~~
+conftest.c:90:1: note: 'sprintf' is declared in header '<stdio.h>'
+   89 | #include <limits.h>
+  +++ |+#include <stdio.h>
+   90 | #undef sprintf
