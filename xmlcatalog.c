@@ -369,13 +369,13 @@ int main(int argc, char **argv) {
 	} else if ((!strcmp(argv[i], "-no-super-update")) ||
 	    (!strcmp(argv[i], "--no-super-update"))) {
 	    no_super_update++;
-	} else if ((!strcmp(argv[i], "-add")) ||
-	    (!strcmp(argv[i], "--add"))) {
-	    if (sgml)
-		i += 2;
-	    else
-		i += 3;
-	    add++;
+	// } else if ((!strcmp(argv[i], "-add")) ||
+	//     (!strcmp(argv[i], "--add"))) {
+	//     if (sgml)
+	// 	i += 2;
+	//     else
+	// 	i += 3;
+	//     add++;
 	} else if ((!strcmp(argv[i], "-del")) ||
 	    (!strcmp(argv[i], "--del"))) {
 	    i += 1;
