@@ -366,9 +366,9 @@ int main(int argc, char **argv) {
 	} else if ((!strcmp(argv[i], "-convert")) ||
 	    (!strcmp(argv[i], "--convert"))) {
 	    convert++;
-	} else if ((!strcmp(argv[i], "-no-super-update")) ||
-	    (!strcmp(argv[i], "--no-super-update"))) {
-	    no_super_update++;
+	// } else if ((!strcmp(argv[i], "-no-super-update")) ||
+	//     (!strcmp(argv[i], "--no-super-update"))) {
+	//     no_super_update++;
 	// } else if ((!strcmp(argv[i], "-add")) ||
 	//     (!strcmp(argv[i], "--add"))) {
 	//     if (sgml)
