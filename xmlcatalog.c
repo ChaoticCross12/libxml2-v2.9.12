@@ -35,7 +35,7 @@ static int sgml = 0;
 static int noout = 0;
 static int create = 0;
 static int add = 0;
-static int del = 0;
+static int dele = 0;
 static int convert = 0;
 static int no_super_update = 0;
 static int verbose = 0;
@@ -241,13 +241,13 @@ static void usershell(void) {
 			printf("add command failed\n");
 		}
 	    }
-	} else if (!strcmp(command, "del")) {
+	} else if (!strcmp(command, "dele")) {
 	    if (nbargs != 1) {
-		printf("del requires 1\n");
+		printf("dele requires 1\n");
 	    } else {
 		ret = xmlCatalogRemove(BAD_CAST argv[0]);
 		if (ret <= 0)
-		    printf("del command failed\n");
+		    printf("dele command failed\n");
 
 	    }
 	} else if (!strcmp(command, "resolve")) {
@@ -293,7 +293,7 @@ static void usershell(void) {
 	    printf("\tsystem SystemID: make a SYSTEM identifier lookup\n");
 	    printf("\tresolve PublicID SystemID: do a full resolver lookup\n");
 	    printf("\tadd 'type' 'orig' 'replace' : add an entry\n");
-	    printf("\tdel 'values' : remove values\n");
+	    printf("\tdele 'values' : remove values\n");
 	    printf("\tdump: print the current catalog state\n");
 	    printf("\tdebug: increase the verbosity level\n");
 	    printf("\tquiet: decrease the verbosity level\n");
@@ -314,15 +314,15 @@ static void usage(const char *name) {
 Usage : %s [options] catalogfile entities...\n\
 \tParse the catalog file (void specification possibly expressed as \"\"\n\
 \tappoints the default system one) and query it for the entities\n\
-\t--sgml : handle SGML Super catalogs for --add and --del\n\
+\t--sgml : handle SGML Super catalogs for --add and --dele\n\
 \t--shell : run a shell allowing interactive queries\n\
 \t--create : create a new catalog\n\
 \t--add 'type' 'orig' 'replace' : add an XML entry\n\
 \t--add 'entry' : add an SGML entry\n", name);
     printf("\
-\t--del 'values' : remove values\n\
+\t--dele 'values' : remove values\n\
 \t--noout: avoid dumping the result on stdout\n\
-\t         used with --add or --del, it saves the catalog changes\n\
+\t         used with --add or --dele, it saves the catalog changes\n\
 \t         and with --sgml it automatically updates the super catalog\n\
 \t--no-super-update: do not update the SGML super catalog\n\
 \t-v --verbose : provide debug information\n");
@@ -376,10 +376,10 @@ int main(int argc, char **argv) {
 	//     else
 	// 	i += 3;
 	//     add++;
-	} else if ((!strcmp(argv[i], "-del")) ||
-	    (!strcmp(argv[i], "--del"))) {
+	} else if ((!strcmp(argv[i], "-dele")) ||
+	    (!strcmp(argv[i], "--dele"))) {
 	    i += 1;
-	    del++;
+	    dele++;
 	} else {
 	    fprintf(stderr, "Unknown option %s\n", argv[i]);
 	    usage(argv[0]);
@@ -395,8 +395,8 @@ int main(int argc, char **argv) {
 	    else
 		i += 3;
 	    continue;
-	} else if ((!strcmp(argv[i], "-del")) ||
-	    (!strcmp(argv[i], "--del"))) {
+	} else if ((!strcmp(argv[i], "-dele")) ||
+	    (!strcmp(argv[i], "--dele"))) {
 	    i += 1;
 
 	    /* No catalog entry specified */
@@ -427,7 +427,7 @@ int main(int argc, char **argv) {
     if (convert)
         ret = xmlCatalogConvert();
 
-    if ((add) || (del)) {
+    if ((add) || (dele)) {
 	for (i = 1; i < argc ; i++) {
 	    if (!strcmp(argv[i], "-"))
 		break;
@@ -435,7 +435,7 @@ int main(int argc, char **argv) {
 	    if (argv[i][0] != '-')
 		continue;
 	    if (strcmp(argv[i], "-add") && strcmp(argv[i], "--add") &&
-		strcmp(argv[i], "-del") && strcmp(argv[i], "--del"))
+		strcmp(argv[i], "-dele") && strcmp(argv[i], "--dele"))
 		continue;
 
 	    if (sgml) {
@@ -542,8 +542,8 @@ int main(int argc, char **argv) {
 			    exit_value = 3;
 			}
 			i += 3;
-		} else if ((!strcmp(argv[i], "-del")) ||
-		    (!strcmp(argv[i], "--del"))) {
+		} else if ((!strcmp(argv[i], "-dele")) ||
+		    (!strcmp(argv[i], "--dele"))) {
 		    ret = xmlCatalogRemove(BAD_CAST argv[i + 1]);
 		    if (ret < 0) {
 			fprintf(stderr, "Failed to remove entry %s\n",
@@ -592,7 +592,7 @@ int main(int argc, char **argv) {
 	    }
 	}
     }
-    if ((!sgml) && ((add) || (del) || (create) || (convert))) {
+    if ((!sgml) && ((add) || (dele) || (create) || (convert))) {
 	if (noout && filename && *filename) {
 	    FILE *out;
 
